@@ -1,0 +1,263 @@
+@charset "UTF-8";
+
+#pag_produto{
+  box-shadow: 10px 10px 15px #000;
+  width: 1200px;
+  height: 600px;
+  margin: 50px auto 50px auto;
+  background: #FFF;
+  position: relative;
+  border-radius: 15px;
+}
+
+#foto_prod{
+  position: relative;
+  height: 80%;
+  width: 50%;
+  margin:60px 0px 0px 20px;
+  float: left;
+}
+
+#foto_prod aside{
+  width:15%;
+  height:100%;
+  position: relative;
+  float: left;
+}
+
+#gal a {
+  cursor: pointer;
+  box-shadow: 1px 1px 6px 1px #9c9c9c;
+  padding: 3px;
+  display: table;
+  text-align: center;
+  float: left;
+  margin: 5px 5px;
+  vertical-align: middle;
+  width: 48px;
+  height: 48px;
+}
+.active {
+  background: #888888;
+}
+
+#gal a:hover {
+  background: #888888;
+}
+
+
+#gal a img{
+  max-width: 48px;
+  max-height: 48px;
+}
+
+#foto_prod section{
+  border-right: 1px solid rgba(0,0,0,.7);
+  float:right;
+  width:78%;
+  height:100%;
+  padding:0px 10px 0px 0px;
+}
+
+#img_troca{
+  max-height: 100%;
+  max-width: 100%
+}
+
+#pagprod_descricao{
+  float: left;
+  width: 40%;
+  position: relative;
+  padding: 50px 0px 0px 100px;
+}
+
+#pagprod_descricao p{
+  position: relative;
+}
+
+
+
+.pag_nomeprod{
+  color:#B40404;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+}
+
+.pag_desprod{
+  display: table;
+  font-weight: 100;
+  font-size: 16px;
+  min-height: 50px;
+  max-height: 90px;
+  padding: 0px 0px 20px 0px;
+}
+
+.pag_tamprod{
+  font-weight: 400;
+  text-align: left;
+  font-size: 20px;
+  margin-bottom: 50px;
+
+}
+
+.pag_quantprod{
+  display: none;
+}
+
+.pag_precoprod{
+  font-weight: bold;
+  text-align: left;
+  font-size: 26px;
+}
+
+#pagprod_tamanho{
+  min-height: 100px;
+  display: table;
+  width: 100%;
+}
+
+#pagprod_tamanho span{
+  color: #B40404;
+  text-align: center;
+  width: 80%;
+  font-size: 20px;
+  display: table;
+  padding: 0px 0px 10px 0px;
+  border-bottom: 1px solid #000;
+  margin: auto;
+}
+#pagprod_tamanho input[type="radio"] {
+  opacity:0;
+}
+#pagprod_tamanho label {
+  height: 18px;
+  min-width: 18px;
+  cursor: pointer;
+  background: #dcdcdc;
+  box-shadow: 1px 1px 6px 1px #9c9c9c;
+  padding: 5px;
+  display: table;
+  text-align: center;
+  float: left;
+  margin: 0px 5px;
+  vertical-align: middle;
+}
+#pagprod_tamanho input[type="radio"]:checked+label {
+  border:3px #820101 solid;
+}
+
+#pagprod_tamanho label p{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#pagprod_cor{
+  min-height: 100px;
+  display: table;
+  width: 100%;
+}
+
+#pagprod_cor span{
+  color:#B40404;
+  text-align: center;
+  width: 80%;
+  font-size: 20px;
+  display: table;
+  padding: 0px 0px 10px 0px;
+  border-bottom: 1px solid #000;
+  margin: auto;
+}
+#pagprod_cor input[type="radio"] {
+  visibility: hidden;
+  display:none;
+}
+#pagprod_cor label {
+  height:18px;
+  width:18px;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px 1px #9c9c9c;
+  padding: 5px;
+  float: left;
+  margin: 0px 5px;
+}
+
+#pagprod_cor input[type="radio"]:checked+label {
+  border:3px #820101 solid;
+}
+
+#pagprod_cor label p{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#div_preço{
+  padding:0px 0px 10px 0px
+}
+
+#produto_indisponivel{
+  width:100%;
+}
+
+#produto_indisponivel img{
+  width:100%;
+}
+
+#fotoingresso{
+  width: 100%;
+  border-radius: 15px;
+  height: 500px;
+  box-shadow: inset -4px -145px 71px -14px rgba(0, 0, 0, 0.8);
+}
+
+.nomeingresso{
+  text-shadow: 1px 1px #000;
+  display: block;
+  margin: 30px;
+  color: #B40404;
+  font-weight: bold;
+  font-size: 72px;
+  width: 100%;
+}
+
+.descingresso{
+  width: 90%;
+  font-size: 18px;
+  margin: auto;
+}
+
+#descricaoingresso{
+  display: block;
+  margin: auto;
+}
+
+#ingressolateral{
+  margin: 50px 0 0 40px;
+}
+
+#ingressolateral p{
+  font-size:18px;
+}
+
+#topinfo{
+  display: table;
+  width: 100%;
+  min-height: 200px;
+}
+
+#bottominfo{
+  margin: 80px 0 30px 0;
+}
+
+#bottominfo p{
+  text-align: center;
+  font-size: 26px;
+  color: #B40404;
+  font-weight: bold;
+}
+
+#bottominfo img{
+  display:block;
+  width: 260px;
+  margin: 50px auto;
+}

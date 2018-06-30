@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.Fundo_painel{
+	display:table;
+	border-radius: 15px;
+	background:rgba(0,0,0,.9);
+	position: relative;
+	margin: 50px auto 50px auto;
+	height: 800px;
+	width: 75.806%;
+}
+
+.Fundo_painel ul li{
+	display: block;
+	float: left;
+	list-style: none;
+	padding: 6.25%;
+}
+
+.Fundo_painel p{
+    text-align: center;
+    color: #FFF;
+    font-size: 26px;
+    font-weight: bold;	
+}
+
+.Fundo_painel ul li a img{
+	border-radius: 50px;
+}
+
+.Fundo_cadprod{
+	background-color:#FFF;
+	position:relative;
+	height:350px;
+	width:500px;
+	left:350px;
+	top:15px;
+	opacity:0.9
+}
+
+.Fundo_listuser{
+	background-color:#FFF;
+	position:relative;
+	height:300px;
+	width:1100px;
+	left:350px;
+	top:15px;
+	opacity:0.9
+}
+
+.Fundo_listprod{
+	background-color:#FFF;
+	position:relative;
+	height:15000px;
+	width:1500px;
+	left:350px;
+	top:15px;
+	opacity:0.9
+}
+
+#botao_sair{
+	top: 10px;
+	left: 305px;
+	position: relative;
+	background: #FFF;
+	padding: 10px 50px;
+	text-decoration: none;
+	color: #000;
+	box-shadow: 5px 5px 1px;
+}

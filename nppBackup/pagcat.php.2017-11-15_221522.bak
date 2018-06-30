@@ -1,0 +1,151 @@
+<?php
+session_start();
+include("php/conexao.php");
+?>
+<html>
+<head>
+  <script>
+  function submit(){
+    document.forms['form1'].submit();
+  }
+</script>
+<script src='Js/jquery-3.2.1.min.js'/></script>
+<script type="text/javascript" src="Js/coin-slider.js"></script>
+<link rel="stylesheet" href="css/coin-slider-styles.css" type="text/css" />
+<script src="Js/funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<title>Rock For You</title>
+<link rel="shortcut icon" href="img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<meta charset="utf-8">
+</head>
+<body onLoad="slide1()">
+  <div id='interface'>
+    <?php
+    $cat = $_GET["cat"];
+    $sql = "SELECT * from categoria WHERE nomecat LIKE '%" .$cat."%'";
+    $query = $mysqli->query($sql);
+    $dados  = mysqli_fetch_array($query);
+    $nomecat = $dados['nomecat'];
+    $sql1 = "SELECT * from produto where categoria LIKE '%" .$cat."%' ";
+    if(!empty($_POST['txtFiltro']))
+    {
+      $filtro = $_POST['txtFiltro'];
+      $sql1 .= "AND nomeprod LIKE '%" .$filtro."%'";
+    }
+    if(!empty($_POST['banda']))
+    {
+      $banda = $_POST['banda'];
+      $sql1 .= "and banda ='".$banda."' ";
+    }
+    if(!empty($_POST['Order']))
+    {
+      $order = $_POST['Order'];
+      $sql1 .= "ORDER BY $order ASC ";
+    }else{
+      $sql1 .= "ORDER BY nomeprod ASC ";
+    }
+    include("php/conexao_menu_fixo.php");
+    include("php/conexao_menu.php");
+    include("php/conexao_banner.php");
+    echo"	  <script type='text/javascript'>
+    $(document).ready(function() {
+      $('#coin-slider').coinslider({effect: 'random', navigation: true,width:$('#coin-slider').parent().width(),height:400, delay: 5000 });
+    });
+    </script>";
+    echo"<div id='produtos_pag_total'>
+    <div id='produtos_pag_menu'>
+    <div id='produtos_pag_menu_filtro'>
+    <form name='form1' method='post' action=''>
+    <input type='text' class='txtFiltro' name='txtFiltro' autocomplete='off'>
+    <input type='image' src='img/Botao-pesquisar.png' name='btnFiltro' class='btnFiltro' value='BUSCAR'/>
+    </form>
+    <form name='form1' method='post' action=''>
+    <select type='submit' name='Order' onchange='submit();'>";
+    if(!empty($order))
+    {
+      echo "<option value='$order' selected>Ordenar por</option>";
+    }else{ echo "<option value=''>Ordenar por</option>";};
+    echo "<option value='nomeprod'>Nome</option>
+    <option value='dataimg'>Adicionado Recentemente </option>
+    <option value='preco'>Menor Preço</option>
+    </select>
+    </form>
+    <form name='form1' method='post' action=''>
+    <select type='submit' name='banda' onchange='submit();'>";
+    if(!empty($banda))
+    {
+      echo "<option value='$banda' selected>Selecione uma banda</option>";
+    }else{ echo "<option value=''>Selecione uma banda</option>";};
+    $sqlbanda = "SELECT DISTINCT banda FROM produto where categoria = '".$cat."'";
+    $resultbanda = mysqli_query($db,$sqlbanda);
+    while($row = mysqli_fetch_array($resultbanda)) {
+      echo "<option value=".$row['banda'].">".$row['banda']."</option>";
+    }
+    echo"</select>
+    </form>
+    </div>
+    </div>
+    <section id='produtos_pag'>";
+    echo "<span class='tituloprodutos'>".$nomecat."</span>
+    <div id='produtostotal_pag'>";
+    $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
+    $query2 = $mysqli->query($sql1);
+    $result = mysqli_num_rows($query2);
+    $registros = 15;
+    $numPaginas = ceil($result/$registros);
+    $inicio = ($registros*$pagina)-$registros;
+    $sql1 = "SELECT * from produto where categoria LIKE '%" .$cat."%' ";
+    if(!empty($_POST['txtFiltro']))
+    {
+      $filtro = $_POST['txtFiltro'];
+      $sql1 .= "AND nomeprod LIKE '%" .$filtro."%'";
+    }
+    if(!empty($_POST['banda']))
+    {
+      $banda = $_POST['banda'];
+      $sql1 .= "AND banda LIKE '%" .$banda."%'";
+    }
+    if(isset($_POST['Order']))
+    {
+      $order = $_POST['Order'];
+      $sql1 .= "ORDER BY $order ASC ";
+    }
+    $sql1 .="limit $inicio,$registros";
+    $query2 = $mysqli->query($sql1);
+    while($row = mysqli_fetch_array($query2)) {
+      $id = $row["idprod"];
+      $precototal = $row['preco'] - ($row['preco'] * ($row['descontopor'] / 100 )) - $row['descontosub'];
+      $precov = number_format($precototal, 2, ',', ' ');
+      echo "<a href='pagprod.php?id=$id'>";
+      echo"<div class='proddiv'>
+	  <div class='proddivimg'>
+      <img src='upload/".$row['imgprod']."'>
+	  </div>";
+      echo "<div class='proddiviinf'>
+	  <p class='nomeprod'>" .$row['nomeprod']."</p>";
+      echo "<p class='precoprod'>R$ ".$precov."</p>
+	  </div>";
+      echo "</a>";
+      echo "</div>";
+    }
+    echo "</div>";  
+ 
+    if ($numPaginas > 1){
+      echo"<div class='container_arrow_pag'>";
+      $n = $pagina;
+      $a = $n-1;
+      $p = $n+1;
+      echo"<a class='arrow_pag' href='pagcat.php?cat=".$cat."&pagina=".$a."'><img src='img/pagback.png'/></a>";
+      for($i = 1; $i < $numPaginas + 1; $i++) {
+        echo "<a class='numpag' href='pagcat.php?cat=".$cat."&pagina=$i'>".$i."</a> ";
+      }
+      echo"<a class='arrow_pag' href='pagcat.php?cat=".$cat."&pagina=".$p."'><img src='img/pagfront.png'/></a>";
+      echo "</div>";
+    }
+    echo "</div>";
+	 echo "</section>";
+    include("php/Footer.php");
+    ?>
+  </body>
+  </html>
